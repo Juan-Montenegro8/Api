@@ -1,10 +1,11 @@
 package com.example.api.service;
 
+import com.example.api.model.dto.clientedto;
 import com.example.api.model.entity.cliente;
 
 public interface ICliente {
 
-    cliente save(cliente Cliente);
+    cliente save(clientedto Cliente);
 
     cliente findById(Integer id);
 

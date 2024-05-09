@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.api.model.dao.ClienteDAO;
+import com.example.api.model.dto.clientedto;
 import com.example.api.model.entity.cliente;
 import com.example.api.service.ICliente;
 
@@ -16,7 +17,14 @@ public class ClienteImpl implements ICliente{
 
     @Transactional
     @Override
-    public cliente save(cliente Cliente) {
+    public cliente save(clientedto ClienteDto) {
+        cliente Cliente = cliente.builder()
+            .idCliente(ClienteDto.getIdCliente())
+            .nombre(ClienteDto.getNombre())
+            .apellido(ClienteDto.getApellido())
+            .fechaRegistro(ClienteDto.getFechaRegistro())
+            .correo(ClienteDto.getCorreo())
+            .build();
         return clienteDAO.save(Cliente);
     }
 
