@@ -32,9 +32,9 @@ public class ClienteCrontoller {
 
     @PostMapping("cliente")
     @ResponseStatus(HttpStatus.CREATED)
-    public cliente create(@RequestBody clientedto ClienteDto){
+    public clientedto create(@RequestBody clientedto ClienteDto){
         cliente Clientesave = clienteservice.save(ClienteDto);
-        return cliente.builder()
+        return clientedto.builder()
             .idCliente(Clientesave.getIdCliente())
             .nombre(Clientesave.getNombre())
             .apellido(Clientesave.getApellido())
@@ -45,9 +45,9 @@ public class ClienteCrontoller {
     
     @PutMapping("cliente")
     @ResponseStatus(HttpStatus.CREATED)
-    public cliente update(@RequestBody clientedto ClienteDto){
+    public clientedto update(@RequestBody clientedto ClienteDto){
         cliente Clienteupdate = clienteservice.save(ClienteDto);
-        return cliente.builder()
+        return clientedto.builder()
             .idCliente(Clienteupdate.getIdCliente())
             .nombre(Clienteupdate.getNombre())
             .apellido(Clienteupdate.getApellido())
