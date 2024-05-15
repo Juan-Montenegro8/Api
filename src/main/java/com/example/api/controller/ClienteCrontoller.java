@@ -103,9 +103,9 @@ public class ClienteCrontoller {
             }
     }
 
-    //@DeleteMapping("cliente/{id}")
+    @DeleteMapping("cliente/{id}")
     //@ResponseStatus(HttpStatus.NO_CONTENT)
-    //public ResponseEntity<?> delete(@PathVariable Integer id){
+    public ResponseEntity<?> delete(@PathVariable Integer id){
         //Map<String, Object> response= new HashMap<>();
         //try {
             //cliente clientedelete = clienteservice.findById(id);
@@ -117,11 +117,6 @@ public class ClienteCrontoller {
 
             //return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         //}
-    //}
-
-    @DeleteMapping("cliente/{id}")
-    public ResponseEntity<?> delete(@PathVariable Integer id){
-        
         try {
             cliente clientedelete = clienteservice.findById(id);
             clienteservice.delete(clientedelete);
