@@ -61,13 +61,13 @@ public class ClienteCrontoller {
                     .mensaje(e.getMessage())
                     .objeto(null)
                     .build()
-                ,HttpStatus.INTERNAL_SERVER_ERROR);
+                ,HttpStatus.METHOD_NOT_ALLOWED);
         }    
     }
     
-    @PutMapping("cliente")
+    @PutMapping("cliente/{id}")
     //@ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> update(@RequestBody clientedto ClienteDTO){
+    public ResponseEntity<?> update(@RequestBody clientedto ClienteDTO, @PathVariable Integer id){
         //cliente Clienteupdate = clienteservice.save(ClienteDto);
         //return clientedto.builder()
             //.idCliente(Clienteupdate.getIdCliente())
@@ -78,26 +78,36 @@ public class ClienteCrontoller {
             //.build();
             cliente Clienteupdate = null;
             try {
-                Clienteupdate = clienteservice.save(ClienteDTO);
-                ClienteDTO = clientedto.builder()
-                    .idCliente(Clienteupdate.getIdCliente())
-                    .nombre(Clienteupdate.getNombre())
-                    .apellido(Clienteupdate.getApellido())
-                    .fechaRegistro(Clienteupdate.getFechaRegistro())
-                    .correo(Clienteupdate.getCorreo())
-                    .build();
-                return new ResponseEntity<>(MensajeResponse.builder()
-                    .mensaje("Guardado Correctamente")
-                    .objeto(ClienteDTO)
-                    .build()
-                ,HttpStatus.CREATED);   
+                cliente clientefind = clienteservice.findById(id);    
+                if (clientefind != null) {
+                    Clienteupdate = clienteservice.save(ClienteDTO);
+                    ClienteDTO = clientedto.builder()
+                        .idCliente(Clienteupdate.getIdCliente())
+                        .nombre(Clienteupdate.getNombre())
+                        .apellido(Clienteupdate.getApellido())
+                        .fechaRegistro(Clienteupdate.getFechaRegistro())
+                        .correo(Clienteupdate.getCorreo())
+                        .build();
+                    return new ResponseEntity<>(MensajeResponse.builder()
+                        .mensaje("Guardado Correctamente")
+                        .objeto(ClienteDTO)
+                        .build()
+                    ,HttpStatus.CREATED); 
+                }else{
+                    return new ResponseEntity<>(
+                        MensajeResponse.builder()
+                            .mensaje("El registro no se encentra en la base de datos")
+                            .objeto(null)
+                            .build()
+                        ,HttpStatus.NOT_FOUND );
+                }  
             } catch (DataAccessException e) {
                 return new ResponseEntity<>(
                     MensajeResponse.builder()
                         .mensaje(e.getMessage())
                         .objeto(null)
                         .build()
-                    ,HttpStatus.INTERNAL_SERVER_ERROR);
+                    ,HttpStatus.METHOD_NOT_ALLOWED );
             }
     }
 
@@ -146,7 +156,7 @@ public class ClienteCrontoller {
                     .mensaje("el registro no existe")
                     .objeto(null)
                     .build()
-                ,HttpStatus.INTERNAL_SERVER_ERROR);
+                ,HttpStatus.NOT_FOUND);
         }
 
         return new ResponseEntity<>(
