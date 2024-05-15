@@ -8,8 +8,6 @@ import com.example.api.model.payload.MensajeResponse;
 import com.example.api.service.ICliente;
 
 //import java.util.*;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
