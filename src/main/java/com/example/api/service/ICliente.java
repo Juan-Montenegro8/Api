@@ -10,4 +10,6 @@ public interface ICliente {
     cliente findById(Integer id);
 
     void delete(cliente Cliente);
+
+    boolean existsById(Integer id);
 }

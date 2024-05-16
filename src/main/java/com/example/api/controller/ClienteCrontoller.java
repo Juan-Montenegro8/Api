@@ -79,8 +79,9 @@ public class ClienteCrontoller {
             cliente Clienteupdate = null;
             try {
                 //cliente clientefind = clienteservice.findById(ClienteDTO.getIdCliente());    
-                cliente clientefind = clienteservice.findById(id);    
-                if (clientefind != null) {
+                //cliente clientefind = clienteservice.findById(id);    
+                if (clienteservice.existsById(id)) {
+                    ClienteDTO.setIdCliente(id);
                     Clienteupdate = clienteservice.save(ClienteDTO);
                     ClienteDTO = clientedto.builder()
                         .idCliente(Clienteupdate.getIdCliente())
