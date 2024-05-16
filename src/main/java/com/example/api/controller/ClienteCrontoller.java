@@ -67,7 +67,7 @@ public class ClienteCrontoller {
     
     @PutMapping("cliente/{id}")
     //@ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> update(@RequestBody clientedto ClienteDTO, @PathVariable Integer id){
+    public ResponseEntity<?> update(@RequestBody clientedto ClienteDTO, @PathVariable  Integer id){
         //cliente Clienteupdate = clienteservice.save(ClienteDto);
         //return clientedto.builder()
             //.idCliente(Clienteupdate.getIdCliente())
@@ -78,6 +78,7 @@ public class ClienteCrontoller {
             //.build();
             cliente Clienteupdate = null;
             try {
+                //cliente clientefind = clienteservice.findById(ClienteDTO.getIdCliente());    
                 cliente clientefind = clienteservice.findById(id);    
                 if (clientefind != null) {
                     Clienteupdate = clienteservice.save(ClienteDTO);
